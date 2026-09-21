@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env*
+!.env.example
+design/qa-*.png
+TASK_STATE.md
+supabase/.temp/
