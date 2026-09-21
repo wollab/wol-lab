@@ -1,6 +1,10 @@
 # WoL Lab Directory
 
-Local implementation preview for `wollab.wizardsoflearning.com`.
+Production pilot for the WoL public directory and shared Admin system.
+
+Live URL: `https://wollab.github.io/wol-lab/`
+
+Custom domain target: `https://wollab.wizardsoflearning.com/` (DNS record still pending).
 
 ## Included
 
@@ -9,13 +13,13 @@ Local implementation preview for `wollab.wizardsoflearning.com`.
 - Public/private filtering and team-mode preview
 - Search, category filters, grouped resource sections and downloadable SVG QR codes
 - Per-project expandable milestone, next step and missing-input summary, plus downloadable Markdown report
-- WoL Lab Admin category naming, section ordering and visibility controls stored in the local preview
-- Responsive `/admin` prototype with site-specific fields and Draft → Preview → Publish flow
+- WoL Lab Admin category naming, section ordering and visibility controls persisted through Supabase when signed in
+- Responsive `/admin` pilot with site-specific fields and Draft → Preview → Publish flow
 - Shared Supabase schema for Google allowlist roles, resources, content, revisions and social post ledger
 - Data validation that blocks public Google Form edit URLs
 - Browser-cover capture script using current live websites
 
-The local Admin stores demo edits in browser storage until Supabase environment values are supplied. It never embeds a service key or GitHub token in the browser.
+The production Admin uses Supabase Auth and RLS for shared data. Google OAuth still needs to be enabled before Chief can sign in; unauthenticated visitors can use the public directory. It never embeds a service key or GitHub token in the browser.
 
 Category names edited in WoL Lab Admin propagate to the work-type cards, filter navigation, section headings and category labels on resource cards after refresh.
 
@@ -44,17 +48,16 @@ The Facebook audit seed and duplicate review live under:
 
 `03_Documents/06_Business_Systems/WoL-Owned-Audience-System/content-community-communication/publication-ledger/`
 
-## Connect Supabase
+## Production configuration
 
-1. Create a Supabase project owned by WoL.
-2. Run `supabase/migrations/202609200001_wol_lab_content_system.sql`.
-3. Enable Google OAuth and add localhost plus the future custom domain callback URLs.
-4. Insert Chief's lowercase email in `allowed_users` with role `owner`.
-5. Copy `.env.example` to `.env` and add the public project URL and anonymous key.
-6. Store deployment credentials only in Supabase Edge Function or GitHub Actions secrets.
+1. Supabase project `ogxjhyysevcjljjmjham` is connected, seeded and configured for the GitHub Pages URL plus localhost.
+2. `contact@wizardsoflearning.com` is allowlisted as the owner.
+3. Enable Google OAuth with callback `https://ogxjhyysevcjljjmjham.supabase.co/auth/v1/callback` before using Admin.
+4. Add the custom-domain CNAME when DNS access is available, then enable HTTPS in GitHub Pages.
+5. Store deployment credentials only in Supabase Edge Function or GitHub Actions secrets.
 
 Do not put a Supabase service-role key or GitHub token in `VITE_*` variables.
 
 ## Publication boundary
 
-This folder is a local preview. Creating the GitHub repository, setting DNS, applying the Supabase migration and publishing the site are separate external actions after Chief reviews the preview.
+The GitHub repository and Pages deployment are live. Supabase migration and seed are applied. DNS/custom-domain setup and Google OAuth remain separate configuration gates.
