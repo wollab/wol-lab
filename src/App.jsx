@@ -12,6 +12,7 @@ const updateStatusLabels = { confirmed: 'ยืนยันแล้ว', propos
 const defaultDirectoryLayout = { categoryOrder: ['knowledge', 'games', 'products', 'cases', 'systems'], categoryLabels: {}, hiddenCategories: [], showWorkTypes: true, showAbout: true };
 const layoutStorageKey = 'wol-lab-directory-layout-v1';
 const adminResourceStorageKey = 'wol-lab-admin-demo-wol-lab-v2';
+const publicAsset = (path) => path?.startsWith('/') ? `${import.meta.env.BASE_URL}${path.slice(1)}` : path;
 
 function readDirectoryLayout() {
   try { return { ...defaultDirectoryLayout, ...JSON.parse(localStorage.getItem(layoutStorageKey)) }; }
@@ -91,7 +92,7 @@ function DirectoryApp() {
   return (
     <div className="site-shell">
       <header className="site-header">
-          <a className="brand" href="/" aria-label="WoL Lab หน้าหลัก"><img className="brand-logo" src="/wol-logo.png" alt="Wizards of Learning" /><span><strong>WoL Lab</strong><small>Wizards of Learning</small></span></a>
+          <a className="brand" href={import.meta.env.BASE_URL} aria-label="WoL Lab หน้าหลัก"><img className="brand-logo" src={publicAsset('/wol-logo.png')} alt="Wizards of Learning" /><span><strong>WoL Lab</strong><small>Wizards of Learning</small></span></a>
         <nav aria-label="เมนูหลัก"><a href="#directory">เว็บไซต์และเครื่องมือ</a><a href="#about">เกี่ยวกับ WoL Lab</a></nav>
         <button className="team-button" onClick={() => setTeamMode((value) => !value)}>{teamMode ? <ShieldCheck /> : <LogIn />} {teamMode ? 'โหมดทีม' : 'เข้าสู่ระบบทีม'}</button>
         <button className="mobile-menu" aria-label="เปิดเมนู"><Menu /></button>
@@ -104,7 +105,7 @@ function DirectoryApp() {
             <p>พื้นที่เดียวสำหรับค้นหาเว็บ เกม คู่มือ แบบฟอร์ม และระบบที่ WoL สร้างขึ้นจากการทำงานจริง</p>
             <label className="search-box"><Search aria-hidden="true" /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="ค้นหาเว็บไซต์ เครื่องมือ หรือแบบฟอร์ม" /></label>
           </div>
-          <div className="hero-art" aria-hidden="true"><img src="/wol-lab-hero.png" alt="" /><div className="hero-note">เรียนรู้<br />ทดลอง<br />แบ่งปัน</div></div>
+          <div className="hero-art" aria-hidden="true"><img src={publicAsset('/wol-lab-hero.png')} alt="" /><div className="hero-note">เรียนรู้<br />ทดลอง<br />แบ่งปัน</div></div>
         </section>
 
         <div className="category-rail" aria-label="กรองตามประเภท">
@@ -142,7 +143,7 @@ function ResourceCard({ resource, onQr, large = false, compact = false }) {
   const [showUpdate, setShowUpdate] = useState(false);
   return (
     <article className={`resource-card category-${resource.category} ${large ? 'large' : ''} ${compact ? 'compact' : ''}`}>
-      <div className="cover-wrap"><img src={resource.cover} alt="" onError={(event) => { event.currentTarget.style.display = 'none'; }} /><span className={`status status-${resource.status}`}>{statusLabels[resource.status]}</span></div>
+      <div className="cover-wrap"><img src={publicAsset(resource.cover)} alt="" onError={(event) => { event.currentTarget.style.display = 'none'; }} /><span className={`status status-${resource.status}`}>{statusLabels[resource.status]}</span></div>
       <div className="resource-body">
         <div className="resource-copy"><span className="category-label"><Icon />{resource.categoryLabel}</span><h3>{resource.title}</h3><p>{resource.summary}</p></div>
         <div className="resource-actions"><a className="primary-link" href={resource.url} target="_blank" rel="noreferrer">ดูเว็บไซต์ <ExternalLink /></a><button onClick={() => onQr(resource)}><QrCode /> QR Code</button><button className={`plan-button ${showUpdate ? 'active' : ''}`} onClick={() => setShowUpdate((value) => !value)} aria-expanded={showUpdate}><Flag /> แผนงาน {showUpdate ? <ChevronUp /> : <ChevronDown />}</button>{resource.socialLinks?.map((social) => <a key={social.url} className="icon-link" href={social.url} target="_blank" rel="noreferrer" aria-label={`${social.label} ของ ${resource.title}`}><Facebook /></a>)}</div>
