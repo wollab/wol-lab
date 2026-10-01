@@ -5,6 +5,12 @@ insert into public.resources
   (id, title, summary, category, category_label, status, visibility, canonical_url, cover_url, social_links, tags, featured, milestone, next_step, needs, update_status, reviewed_at, last_verified_at)
 values
 (
+  'datawiz', 'DataWiz — ให้ข้อมูลเล่าเรื่อง', 'เปลี่ยนตาราง Excel หรือ CSV เป็นกราฟฟองอากาศและกราฟเส้นที่เคลื่อนไหว พร้อมตัวอย่างข้อมูลจริงให้ลองสำรวจ', 'games', 'เกมและเครื่องมือเรียนรู้',
+  'live', 'public', 'https://datawiz-wol.vercel.app/', '/covers/datawiz.jpg', '[]'::jsonb,
+  array['DataWiz','ข้อมูล','กราฟ','Excel','CSV','visualization']::text[], false, 'เปิดใช้งานสาธารณะแล้ว มีกราฟฟองอากาศ กราฟเส้น และตัวอย่างข้อมูลจริง 6 ชุด', 'รับความคิดเห็นจากผู้ทดลองและปรับเครื่องมือ ก่อนพัฒนาระบบบัญชี บันทึกออนไลน์ และแชร์งาน', 'ตัวอย่างไฟล์หรือข้อสังเกตจากการใช้งานจริง',
+  'confirmed', '2026-10-02'::date, '2026-10-02'::date
+),
+(
   'meta-learning', 'Meta Learning', 'สำรวจทฤษฎีการเรียนรู้ ความสัมพันธ์ และข้อจำกัดของแต่ละแนวคิดจากแหล่งอ้างอิง', 'knowledge', 'คลังความรู้และประวัติศาสตร์',
   'live', 'public', 'https://wollab.github.io/meta-learning/', '/covers/meta-learning.png', '[{"label":"Facebook","url":"https://www.facebook.com/share/19RGsPMmhy/"}]'::jsonb,
   array['learning theory','ครู','นักออกแบบการเรียนรู้']::text[], true, 'เผยแพร่ content batch แรกหลังผ่าน Chief review', 'จัดวันใหม่ให้ ML-01–03 และตรวจ CTA/ภาพก่อนเผยแพร่', 'Chief เลือกว่า ML-01 จะพาไปหน้า Compare โดยตรงหรือหน้าแรก',

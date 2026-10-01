@@ -15,6 +15,13 @@ const facebookMagicCasters = 'https://www.facebook.com/share/g/1EUNiWCvVV/';
 
 export const resources = [
   {
+    id: 'datawiz', title: 'DataWiz — ให้ข้อมูลเล่าเรื่อง',
+    summary: 'เปลี่ยนตาราง Excel หรือ CSV เป็นกราฟฟองอากาศและกราฟเส้นที่เคลื่อนไหว พร้อมตัวอย่างข้อมูลจริงให้ลองสำรวจ',
+    category: 'games', categoryLabel: 'เกมและเครื่องมือเรียนรู้', status: 'live', visibility: 'public',
+    url: 'https://datawiz-wol.vercel.app/', cover: '/covers/datawiz.jpg',
+    socialLinks: [], tags: ['DataWiz', 'ข้อมูล', 'กราฟ', 'Excel', 'CSV', 'visualization'], lastVerifiedAt: '2026-10-02',
+  },
+  {
     id: 'meta-learning',
     title: 'Meta Learning',
     summary: 'สำรวจทฤษฎีการเรียนรู้ ความสัมพันธ์ และข้อจำกัดของแต่ละแนวคิดจากแหล่งอ้างอิง',
@@ -126,6 +133,12 @@ export const resources = [
 ];
 
 const projectUpdates = {
+  datawiz: {
+    updateStatus: 'confirmed', updatedAt: '2026-10-02',
+    milestone: 'เปิดใช้งานสาธารณะแล้ว มีกราฟฟองอากาศ กราฟเส้น และตัวอย่างข้อมูลจริง 6 ชุด',
+    nextStep: 'รับความคิดเห็นจากผู้ทดลองและปรับเครื่องมือ ก่อนพัฒนาระบบบัญชี บันทึกออนไลน์ และแชร์งาน',
+    needs: 'ตัวอย่างไฟล์หรือข้อสังเกตจากการใช้งานจริง',
+  },
   'meta-learning': {
     updateStatus: 'confirmed', updatedAt: '2026-09-20',
     milestone: 'เผยแพร่ content batch แรกหลังผ่าน Chief review',
